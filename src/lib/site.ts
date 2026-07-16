@@ -117,7 +117,7 @@ export const CATEGORIES: CategoryMeta[] = [
     faq: [
       {
         q: 'Quel est le net pour 3 000 € brut en 2026 ?',
-        a: "Environ 2 340 € net avant impôt pour un cadre, 2 340 € avant impôt pour un cadre privé (taux ~22 % non-cadre, ~25 % cadre). Soustrais ensuite ton prélèvement à la source pour obtenir le net à payer.",
+        a: "Environ 2 340 € net avant impôt pour un non-cadre (~22 % de cotisations) et 2 250 € pour un cadre (~25 %). Soustrais ensuite ton prélèvement à la source pour obtenir le net à payer.",
       },
       {
         q: 'Pourquoi un cadre touche moins net qu’un non-cadre ?',

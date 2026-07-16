@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const tool = getToolBySlug(category, slug);
   if (!tool) return {};
   const url = absoluteUrl(`/${tool.category}/${tool.slug}`);
-  const ogImage = tool.ogImage ?? '/og-default.png';
+  // When a tool defines a custom ogImage we use it; otherwise we leave `images`
+  // unset so Next.js falls back to the per-tool opengraph-image.tsx convention
+  // (a real 1200×630 PNG generated at build time). Hard-coding '/og-default.png'
+  // here overrode that generated image and pointed at a file that doesn't exist.
+  const customOg = tool.ogImage ? [{ url: tool.ogImage }] : undefined;
 
   return {
     title: tool.metaTitle,
@@ -31,13 +35,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       title: tool.metaTitle,
       description: tool.metaDescription,
-      images: [{ url: ogImage }],
+      ...(customOg ? { images: customOg } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: tool.metaTitle,
       description: tool.metaDescription,
-      images: [ogImage],
+      ...(customOg ? { images: customOg } : {}),
     },
   };
 }
